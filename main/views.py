@@ -54,7 +54,7 @@ def home(request):
     repeated = total-valid-duplicates_length
 
     return render(request, 'home.html', {'duplicates': duplicates, 'duplicates_length': duplicates_length,
-                                        'shills': shills, 'valid': valid, 'form': form,
+                                         'shills': shills, 'valid': valid, 'form': form,
                                          'total': total, 'repeated': repeated})
 
 
