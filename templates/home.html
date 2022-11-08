@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Educational registration form</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+      html, body {
+      min-height: 100%;
+      }
+      body, div, form, input, select, p {
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 16px;
+      color: #eee;
+      }
+      body {
+      background: url("mem.jpeg") no-repeat center;
+      background-size: cover;
+      }
+      h1, h2 {
+      text-transform: uppercase;
+      font-weight: 400;
+      }
+      h2 {
+      margin: 0 0 0 8px;
+      }
+      .main-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 25px;
+      background: rgba(0, 0, 0, 0.5);
+      }
+      .left-part, form {
+      padding: 25px;
+      }
+      .left-part {
+      text-align: center;
+      }
+      .fa-graduation-cap {
+      font-size: 72px;
+      }
+      form {
+      background: rgba(0, 0, 0, 0.7);
+      }
+      .title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      }
+      .info {
+      display: flex;
+      flex-direction: column;
+      }
+      input, select {
+      padding: 5px;
+      margin-bottom: 30px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #eee;
+      }
+      input::placeholder {
+      color: #eee;
+      }
+      option:focus {
+      border: none;
+      }
+      option {
+      background: black;
+      border: none;
+      }
+      .checkbox input {
+      margin: 0 10px 0 0;
+      vertical-align: middle;
+      }
+      .checkbox a {
+      color: #26a9e0;
+      }
+      .checkbox a:hover {
+      color: #85d6de;
+      }
+      .btn-item, button {
+      padding: 10px 5px;
+      margin-top: 20px;
+      border-radius: 5px;
+      border: none;
+      background: #26a9e0;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 400;
+      color: #fff;
+      }
+      .btn-item {
+      display: inline-block;
+      margin: 20px 5px 0;
+      }
+      button {
+      width: 100%;
+      }
+      button:hover, .btn-item:hover {
+      background: #85d6de;
+      }
+      @media (min-width: 568px) {
+      html, body {
+      height: 100%;
+      }
+      .main-block {
+      flex-direction: row;
+      height: calc(100% - 50px);
+      }
+      .left-part, form {
+      flex: 1;
+      height: auto;
+      }
+      }
+    </style>
+  </head>
+  <body >
+  <h3 class="w3-text-red">Created by Bomberman</h3>
+    <div class="main-block">
+        <form method="post">
+            {% csrf_token %}
+        <div class="title">
+          <i class="fas fa-pencil-alt"></i>
+            <h3><strong>Post Shills Here</strong></h3>
+        </div>
+        <div class="info">
+
+          {{form}}
+
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" name="checkbox"><span>I confirm i have been given permission to use this website.</span>
+        </div>
+        <button type="submit" value="submit">Submit</button>
+      </form>
+
+      <div class="left-part">
+        <img src="https://i.ibb.co/fNfLNXL/photo1632819899.jpg" width="200">
+        <h1></h1>
+        <p>Total Number of shills: {{total}}</p>
+          <p>Total Number of valid: {{valid}}</p>
+          <p>Total Number of Duplicates: {{duplicates_length}}</p>
+          <p>Multiple Duplicates: {{repeated}}</p>
+
+        <div class="btn">
+          <button onclick="document.getElementById('id01').style.display='block'" >See All Duplicates</button>
+
+  <div id="id01" class="w3-modal ">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-blue">
+        <span onclick="document.getElementById('id01').style.display='none'"
+        class="w3-button w3-display-topright">&times;</span>
+        <h2>All Duplicates</h2>
+      </header>
+      <div class="w3-container">
+          {% if duplicates_length == 0 %}
+          <p class="w3-text-black">No duplicate found</p>
+          {% else %}
+          {% for duplicate in duplicates %}
+          <p class="w3-text-black">{{duplicate}}</p>
+            {% endfor %}
+          {% endif %}
+      </div>
+    </div>
+  </div>
+        </div>
+      </div>
+
+    </div>
+
+  <script>
+      // Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+  </script>
+  </body>
+</html>
